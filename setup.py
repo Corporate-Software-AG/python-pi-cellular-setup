@@ -58,10 +58,11 @@ def connect_qmi():
         com_connect = 'sudo qmicli --device=/dev/cdc-wdm0 --device-open-proxy --wds-start-network="ip-type=4,apn=gprs.swisscom.ch" --client-no-release-cid'
         print("QMI Interface: Connect QMI")
         status = os.system(com_connect)
-        print("Status: " + status)
+        print("QMI Interface Status: " + status)
     except:
         print("QMI Interface: Connect QMI failed")
-        time.sleep(2)
+        time.sleep(5)
+        print("QMI Interface: Connect QMI Retry")
         connect_qmi()
 
 def connect_dhcp():
