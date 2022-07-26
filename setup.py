@@ -59,7 +59,7 @@ def set_pin():
         os.system(set_pin_command)
     except:
         print("QMI Interface: Set PIN Retry")
-        sleep(5)
+        time.sleep(5)
         set_pin()
 
 def connect_qmi():
