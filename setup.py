@@ -36,7 +36,6 @@ def bring_sim7600_up():
         else:
             print("QMI Interface: Gerätefehler - konnte nicht aktiviert werden")
             
-        
 def set_raw_ip_mode():
     try:
         com0 = 'sudo ip link set wwan0 down'
@@ -52,15 +51,26 @@ def set_raw_ip_mode():
         time.sleep(2)
         set_raw_ip_mode()
 
-    
+def set_pin():
+    pin = os.environ.get('PIN')
+    try:
+        print("QMI Interface: Set PIN")
+        set_pin_command = 'sudo qmicli --device=/dev/cdc-wdm0 --uim-verify-pin=PIN1,' + pin
+        os.system(set_pin_command)
+    except:
+        print("QMI Interface: Set PIN Retry")
+        sleep(5)
+        set_pin()
+
 def connect_qmi():
     try:
         com_connect = 'sudo qmicli --device=/dev/cdc-wdm0 --device-open-proxy --wds-start-network="ip-type=4,apn=gprs.swisscom.ch" --client-no-release-cid'
         print("QMI Interface: Connect QMI")
-        os.system(com_connect)
+        connect_status = os.popen(com_connect).read()
+        print(connect_status)
     except:
         print("QMI Interface: Connect QMI failed")
-        time.sleep(5)
+        time.sleep(1)
         print("QMI Interface: Connect QMI Retry")
         connect_qmi()
 
@@ -78,9 +88,10 @@ def connect_dhcp():
 if __name__ == "__main__":
     print("QMI Interface: Start Setup")
     bring_sim7600_up()
-    time.sleep(2)
+    time.sleep(1)
     set_raw_ip_mode()
-    time.sleep(2)
+    time.sleep(1)
+    set_pin()
     connect_qmi()
     connect_dhcp()
     print("QMI Interface: Setup Complete")
