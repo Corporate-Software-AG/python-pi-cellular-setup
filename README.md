@@ -8,6 +8,9 @@ sudo apt-get install libqmi-utils
 
 sudo apt-get install udhcpc
 
+sudo systemctl unmask ModemManager.service
+
+sudo systemctl disable ModemManager.service
 
 sudo cp cellular.service /lib/systemd/system/cellular.service
 
