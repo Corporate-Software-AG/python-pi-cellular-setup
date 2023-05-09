@@ -4,10 +4,10 @@ After=multi-user.target
 
 [Service]
 Type=idle
-EnvironmentFile=/home/pi/python-pi-cellular-setup/env.conf
-ExecStart=/usr/bin/python /home/pi/python-pi-cellular-setup/setup.py
-StandardOutput=file:/home/pi/logs/cellularsetup.log
-StandardError=file:/home/pi/logs/cellularsetuperror.log
+EnvironmentFile=/boot/env.conf
+ExecStart=/usr/bin/python /home/armasuisse/python-pi-cellular-setup/setup.py
+StandardOutput=file:/home/armasuisse/logs/cellularsetup.log
+StandardError=file:/home/armasuisse/logs/cellularsetuperror.log
 
 [Install]
 WantedBy=multi-user.target
