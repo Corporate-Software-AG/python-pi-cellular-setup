@@ -20,4 +20,8 @@ sudo systemctl daemon-reload
 
 sudo systemctl enable cellular.service
 
+Fill out the correct values in env.conf and move it to the boot directory with "sudo mv env.conf /boot/env.conf"
+
+it will show an error message which can be ignored
+
 sudo reboot
